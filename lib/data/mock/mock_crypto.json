@@ -1,0 +1,22 @@
+[
+  { "symbol": "BTC", "priceUsd": 29850.15 },
+  { "symbol": "ETH", "priceUsd": 10561.24 },
+  { "symbol": "LTC", "priceUsd": 3676.76 },
+  { "symbol": "XRP", "priceUsd": 5241.62 },
+  { "symbol": "DOGE", "priceUsd": 0.25 },
+  { "symbol": "ADA", "priceUsd": 1.23 },
+  { "symbol": "SOL", "priceUsd": 145.67 },
+  { "symbol": "DOT", "priceUsd": 32.10 },
+  { "symbol": "BNB", "priceUsd": 410.12 },
+  { "symbol": "AVAX", "priceUsd": 22.34 },
+  { "symbol": "TRX", "priceUsd": 0.09 },
+  { "symbol": "LINK", "priceUsd": 18.45 },
+  { "symbol": "UNI", "priceUsd": 6.78 },
+  { "symbol": "MATIC", "priceUsd": 1.12 },
+  { "symbol": "XLM", "priceUsd": 0.32 },
+  { "symbol": "ATOM", "priceUsd": 12.56 },
+  { "symbol": "FIL", "priceUsd": 5.67 },
+  { "symbol": "VET", "priceUsd": 0.08 },
+  { "symbol": "ICP", "priceUsd": 4.56 },
+  { "symbol": "AAVE", "priceUsd": 320.45 }
+] 

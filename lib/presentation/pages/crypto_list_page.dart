@@ -1,66 +1,43 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import '../../data/repositories/mock_crypto_repository.dart';
+import '../../domain/crypto_model.dart';
+import '../widgets/crypto_list_item.dart';
 
 class CryptoListPage extends StatelessWidget {
+  final _repo = MockCryptoRepository();
+
   CryptoListPage({super.key});
-
-  final formatter = NumberFormat.currency(locale: 'en_US', symbol: '\$');
-
-  final List<Map<String, dynamic>> mockData = List.generate(15, (index) {
-    final random = Random(index);
-    return {
-      'symbol': ['BTC', 'ETH', 'LTC', 'XRP'][index % 4],
-      'price': 29850.15 - index * 1000,
-      'color': Color.fromRGBO(
-        random.nextInt(256),
-        random.nextInt(256),
-        random.nextInt(256),
-        0.1, // 10% opacity
-      ),
-    };
-  });
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = Theme.of(context).textTheme.titleMedium;
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: ListView.builder(
-          padding: EdgeInsets.zero,
-          itemCount: mockData.length,
-          itemBuilder: (context, index) {
-            final item = mockData[index];
-            return SizedBox(
-              height: 84,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                          width: 56,
-                          height: 56,
-                          decoration: BoxDecoration(
-                            color: item['color'],
-                            borderRadius: BorderRadius.circular(18),
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Text(item['symbol'], style: textStyle),
-                      ],
-                    ),
-                    Text(
-                      formatter.format(item['price']),
-                      style: textStyle,
-                    ),
-                  ],
-                ),
-              ),
+        child: FutureBuilder<List<CryptoModel>>(
+          future: _repo.fetchCryptoList(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError || snapshot.data == null) {
+              return const Center(child: Text('Failed to load data'));
+            }
+
+            final data = snapshot.data!;
+
+            return ListView.builder(
+              padding: EdgeInsets.zero,
+              itemCount: data.length,
+              itemBuilder: (context, index) {
+                final random = Random(index);
+                final color = Color.fromRGBO(
+                  random.nextInt(256),
+                  random.nextInt(256),
+                  random.nextInt(256),
+                  0.1,
+                );
+                return CryptoListItem(data: data[index], color: color);
+              },
             );
           },
         ),
