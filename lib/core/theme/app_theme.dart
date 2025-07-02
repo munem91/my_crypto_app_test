@@ -7,9 +7,9 @@ class AppTheme {
       useMaterial3: true,
       textTheme: const TextTheme(
         titleMedium: TextStyle(
-          fontFamily: 'SFProDisplay',
-          fontSize: 17,
+          fontFamily: 'SFProText',
           fontWeight: FontWeight.w600,
+          fontSize: 17,
           height: 24 / 17,
           letterSpacing: -0.41,
           color: Color(0xFF17171A),

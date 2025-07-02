@@ -34,8 +34,7 @@ class CryptoListItem extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: color,
                     borderRadius: BorderRadius.circular(18),
-                  ),
-                ),
+                  ),                ),
                 const SizedBox(width: 16),
                 Text(data.symbol, style: textStyle),
               ],
