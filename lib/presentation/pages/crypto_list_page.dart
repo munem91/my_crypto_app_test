@@ -1,43 +1,64 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import '../../data/repositories/mock_crypto_repository.dart';
-import '../../domain/crypto_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/crypto_bloc.dart';
+import '../bloc/crypto_event.dart';
+import '../bloc/crypto_state.dart';
 import '../widgets/crypto_list_item.dart';
 
-class CryptoListPage extends StatelessWidget {
-  final _repo = MockCryptoRepository();
+class CryptoListPage extends StatefulWidget {
+  const CryptoListPage({super.key});
 
-  CryptoListPage({super.key});
+  @override
+  State<CryptoListPage> createState() => _CryptoListPageState();
+}
+
+class _CryptoListPageState extends State<CryptoListPage> {
+  final _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels >=
+          _scrollController.position.maxScrollExtent - 200) {
+        context.read<CryptoBloc>().add(const CryptoEvent.loadMore());
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: FutureBuilder<List<CryptoModel>>(
-          future: _repo.fetchCryptoList(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError || snapshot.data == null) {
-              return const Center(child: Text('Failed to load data'));
-            }
-
-            final data = snapshot.data!;
-
-            return ListView.builder(
-              padding: EdgeInsets.zero,
-              itemCount: data.length,
-              itemBuilder: (context, index) {
-                final random = Random(index);
-                final color = Color.fromRGBO(
-                  random.nextInt(256),
-                  random.nextInt(256),
-                  random.nextInt(256),
-                  0.1,
-                );
-                return CryptoListItem(data: data[index], color: color);
-              },
+        child: BlocBuilder<CryptoBloc, CryptoState>(
+          builder: (context, state) {
+            return state.when(
+              initial: () => const SizedBox.shrink(),
+              loading: () => const Center(child: CircularProgressIndicator()),
+             success: (data) => ListView.builder(
+             controller: _scrollController,
+                padding: EdgeInsets.zero,
+                itemCount: data.length,
+                itemBuilder: (context, index) {
+                  final random = Random(index);
+                  final color = Color.fromRGBO(
+                    random.nextInt(256),
+                    random.nextInt(256),
+                    random.nextInt(256),
+                    0.1,
+                  );
+                  return CryptoListItem(data: data[index], color: color);
+                },
+              ),
+              failure: (message) => Center(child: Text(message)),
             );
           },
         ),

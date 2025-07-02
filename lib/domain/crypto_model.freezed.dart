@@ -15,17 +15,10 @@ final _privateConstructorUsedError = UnsupportedError(
   'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
 );
 
-CryptoModel _$CryptoModelFromJson(Map<String, dynamic> json) {
-  return _CryptoModel.fromJson(json);
-}
-
 /// @nodoc
 mixin _$CryptoModel {
   String get symbol => throw _privateConstructorUsedError;
   double get priceUsd => throw _privateConstructorUsedError;
-
-  /// Serializes this CryptoModel to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of CryptoModel
   /// with the given fields replaced by the non-null parameter values.
@@ -117,12 +110,9 @@ class __$$CryptoModelImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$CryptoModelImpl implements _CryptoModel {
   const _$CryptoModelImpl({required this.symbol, required this.priceUsd});
-
-  factory _$CryptoModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CryptoModelImplFromJson(json);
 
   @override
   final String symbol;
@@ -144,7 +134,6 @@ class _$CryptoModelImpl implements _CryptoModel {
                 other.priceUsd == priceUsd));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, symbol, priceUsd);
 
@@ -155,11 +144,6 @@ class _$CryptoModelImpl implements _CryptoModel {
   @pragma('vm:prefer-inline')
   _$$CryptoModelImplCopyWith<_$CryptoModelImpl> get copyWith =>
       __$$CryptoModelImplCopyWithImpl<_$CryptoModelImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$CryptoModelImplToJson(this);
-  }
 }
 
 abstract class _CryptoModel implements CryptoModel {
@@ -167,9 +151,6 @@ abstract class _CryptoModel implements CryptoModel {
     required final String symbol,
     required final double priceUsd,
   }) = _$CryptoModelImpl;
-
-  factory _CryptoModel.fromJson(Map<String, dynamic> json) =
-      _$CryptoModelImpl.fromJson;
 
   @override
   String get symbol;

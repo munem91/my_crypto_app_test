@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'crypto_model.freezed.dart';
-part 'crypto_model.g.dart';
 
 @freezed
 class CryptoModel with _$CryptoModel {
@@ -10,5 +9,10 @@ class CryptoModel with _$CryptoModel {
     required double priceUsd,
   }) = _CryptoModel;
 
-  factory CryptoModel.fromJson(Map<String, dynamic> json) => _$CryptoModelFromJson(json);
+  factory CryptoModel.fromJson(Map<String, dynamic> json) {
+    return CryptoModel(
+      symbol: json['symbol'] ?? '',
+      priceUsd: double.tryParse(json['priceUsd']?.toString() ?? '0') ?? 0,
+    );
+  }
 } 

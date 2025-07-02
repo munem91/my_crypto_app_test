@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/theme/app_theme.dart';
+import 'config/repository_switch.dart';
+import 'presentation/bloc/crypto_bloc.dart';
+import 'presentation/bloc/crypto_event.dart';
 import 'presentation/pages/crypto_list_page.dart';
 
 void main() {
@@ -14,7 +18,10 @@ class MyCryptoApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: CryptoListPage(),
+      home: BlocProvider(
+        create: (_) => CryptoBloc(getRepository())..add(const CryptoEvent.load()),
+        child: CryptoListPage(),
+      ),
     );
   }
 }

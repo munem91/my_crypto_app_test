@@ -14,3 +14,17 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+### 🔐 API Key
+
+To run the app, create a new file at:
+
+`lib/config/.env.dart`
+
+with the following content:
+
+```dart
+const String coinCapApiKey = 'YOUR_API_KEY_HERE';
+```
+
+This file is ignored by git and should not be committed.
