@@ -39,6 +39,7 @@ dependencies:
   freezed_annotation:
   google_fonts:
   equatable:
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
