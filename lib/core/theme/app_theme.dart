@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Centralizes app theming
 class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(

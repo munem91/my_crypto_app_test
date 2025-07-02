@@ -10,6 +10,7 @@ void main() {
   runApp(const MyCryptoApp());
 }
 
+// Root widget for the app, sets up BLoC and theme
 class MyCryptoApp extends StatelessWidget {
   const MyCryptoApp({super.key});
 

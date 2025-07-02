@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import '../../config/.env.dart';
 
-
+// Handles CoinCap API requests
 class ApiClient {
   final Dio dio;
 
@@ -12,6 +12,7 @@ class ApiClient {
           ),
         );
 
+  // Fetches paginated asset data
   Future<List<Map<String, dynamic>>> getAssets({
     required int offset,
     required int limit,

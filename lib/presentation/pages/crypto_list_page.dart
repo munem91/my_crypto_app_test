@@ -13,12 +13,14 @@ class CryptoListPage extends StatefulWidget {
   State<CryptoListPage> createState() => _CryptoListPageState();
 }
 
+// Manages scroll and infinite loading for the crypto list
 class _CryptoListPageState extends State<CryptoListPage> {
   final _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
+    // Triggers loading more data when near the bottom
     _scrollController.addListener(() {
       if (_scrollController.position.pixels >=
           _scrollController.position.maxScrollExtent - 200) {

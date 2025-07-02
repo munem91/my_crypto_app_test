@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../domain/crypto_model.dart';
 
+// Builds colored list item with symbol and price
 class CryptoListItem extends StatelessWidget {
   final CryptoModel data;
   final Color color;

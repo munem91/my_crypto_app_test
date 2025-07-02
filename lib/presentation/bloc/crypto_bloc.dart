@@ -1,3 +1,4 @@
+// Bloc handles loading and paginated fetching of crypto assets
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'crypto_event.dart';
 import 'crypto_state.dart';
@@ -23,7 +24,6 @@ class CryptoBloc extends Bloc<CryptoEvent, CryptoState> {
           }
         },
         loadMore: (_) async {
-          // используем maybeMap для безопасного доступа к состоянию success
           await state.maybeMap(
             success: (successState) async {
               final currentData = successState.data;
